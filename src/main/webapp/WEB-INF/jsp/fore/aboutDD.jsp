@@ -147,7 +147,6 @@
     imageTime();
     var t = setInterval(imageTime,3000);
 
-
 </script>
 
 
