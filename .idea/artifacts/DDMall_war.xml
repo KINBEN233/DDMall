@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="DDMall:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>DDMall</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="DDMall.war">
+      <element id="artifact" artifact-name="DDMall:war exploded" />
+    </root>
+  </artifact>
+</component>
