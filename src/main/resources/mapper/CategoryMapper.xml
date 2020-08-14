@@ -45,7 +45,7 @@
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from category
+    from category_view
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -56,19 +56,19 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from category
+    from category_view
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from category
+    delete from category_view
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.kinben233.DDMall.pojo.Category" useGeneratedKeys="true">
-    insert into category (name,status)
+    insert into category_view (name,status)
     values (#{name,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.kinben233.DDMall.pojo.Category" useGeneratedKeys="true">
-    insert into category
+    insert into category_view
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="name != null">
         name,
@@ -81,7 +81,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.kinben233.DDMall.pojo.Category">
-    update category
+    update category_view
     <set>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
@@ -93,7 +93,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.kinben233.DDMall.pojo.Category">
-    update category
+    update category_view
     set name = #{name,jdbcType=VARCHAR}
     status=#{status,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}

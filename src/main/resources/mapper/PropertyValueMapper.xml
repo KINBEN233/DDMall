@@ -46,7 +46,7 @@
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from propertyvalue
+    from propertyvalue_view
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -57,21 +57,21 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from propertyvalue
+    from propertyvalue_view
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from propertyvalue
+    delete from propertyvalue_view
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.kinben233.DDMall.pojo.PropertyValue" useGeneratedKeys="true">
-    insert into propertyvalue (pid, ptid, value
+    insert into propertyvalue_view (pid, ptid, value
       )
     values (#{pid,jdbcType=INTEGER}, #{ptid,jdbcType=INTEGER}, #{value,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.kinben233.DDMall.pojo.PropertyValue" useGeneratedKeys="true">
-    insert into propertyvalue
+    insert into propertyvalue_view
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="pid != null">
         pid,
@@ -96,7 +96,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.kinben233.DDMall.pojo.PropertyValue">
-    update propertyvalue
+    update propertyvalue_view
     <set>
       <if test="pid != null">
         pid = #{pid,jdbcType=INTEGER},
@@ -111,7 +111,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.kinben233.DDMall.pojo.PropertyValue">
-    update propertyvalue
+    update propertyvalue_view
     set pid = #{pid,jdbcType=INTEGER},
       ptid = #{ptid,jdbcType=INTEGER},
       value = #{value,jdbcType=VARCHAR}

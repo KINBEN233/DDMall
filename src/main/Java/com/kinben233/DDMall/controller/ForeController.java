@@ -7,6 +7,8 @@ import comparator.*;
 import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -330,21 +332,37 @@ public class ForeController {
     }
 
     @RequestMapping("forecreateOrder")   //前端提交订单消息与收货地址信息后创建订单
-    public String createOrder( Model model,Order order,HttpSession session){  //order包含了地址信息
-        User user =(User)  session.getAttribute("user");
+    @Transactional(propagation= Propagation.REQUIRED,rollbackForClassName="Exception")
+    public String createOrder( Model model,Order order,HttpSession session) {  //order包含了地址信息
+        User user = (User) session.getAttribute("user");
         String orderCode = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date()) + RandomUtils.nextInt(10000);
         order.setOrderCode(orderCode);
         order.setCreateDate(new Date());
         order.setUid(user.getId());
         order.setStatus(OrderService.waitPay);
-        List<OrderItem> ois= (List<OrderItem>)  session.getAttribute("ois");
-        for(OrderItem oi:ois){
-            Product p=productService.get(oi.getPid());
-            p.setStock(p.getStock()-oi.getNumber());
-            productService.update(p);
+        List<OrderItem> ois = (List<OrderItem>) session.getAttribute("ois");
+        List<Product> kucunbuzu = new ArrayList<>();
+        boolean flag = false;
+        for (OrderItem oi : ois) {
+            Product p = productService.get(oi.getPid());
+            if (p.getStock() - oi.getNumber() < 0) {
+                kucunbuzu.add(p);
+                flag = true;
+            } else {
+                p.setStock(p.getStock() - oi.getNumber());
+                productService.update(p);
+            }
         }
-        float total =orderService.add(order,ois);
-        return "redirect:forealipay?oid="+order.getId() +"&total="+total;
+        try {
+            if (flag == true) {
+                throw new RuntimeException();
+            }
+            float total = orderService.add(order, ois);
+            return "redirect:forealipay?oid=" + order.getId() + "&total=" + total;
+        } catch (Exception e) {
+            session.setAttribute("kucunbuzu", kucunbuzu);
+            return "redirect:forebuyFail";
+        }
     }
 
     @RequestMapping("forepayed")   //付款成功页

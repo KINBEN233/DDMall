@@ -5,6 +5,6 @@
 
 <mapper namespace="com.kinben233.DDMall.mapper.AdminMapper">
     <select id="get" resultType="Admin" parameterType="map">
-        select * from Admin where name=#{name} and password=#{password}
+        select * from Admin_view where name=#{name} and password=#{password}
   </select>
 </mapper>

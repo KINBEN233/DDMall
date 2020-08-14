@@ -45,7 +45,7 @@
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from property
+    from property_view
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -56,23 +56,23 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from property
+    from property_view
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from property
+    delete from property_view
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteValue" parameterType="java.lang.Integer">
-    delete from propertyvalue
+    delete from propertyvalue_view
     where ptid=#{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.kinben233.DDMall.pojo.Property" useGeneratedKeys="true">
-    insert into property (cid, name)
+    insert into property_view (cid, name)
     values (#{cid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.kinben233.DDMall.pojo.Property" useGeneratedKeys="true">
-    insert into property
+    insert into property_view
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="cid != null">
         cid,
@@ -91,7 +91,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.kinben233.DDMall.pojo.Property">
-    update property
+    update property_view
     <set>
       <if test="cid != null">
         cid = #{cid,jdbcType=INTEGER},
@@ -103,7 +103,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.kinben233.DDMall.pojo.Property">
-    update property
+    update property_view
     set cid = #{cid,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
