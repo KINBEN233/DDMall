@@ -51,7 +51,7 @@
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from product
+    from product_view
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -62,19 +62,19 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from product
+    from product_view
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from product
+    delete from product_view
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteValue" parameterType="java.lang.Integer">
-    delete from propertyvalue
+    delete from propertyvalue_view
     where pid=#{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.kinben233.DDMall.pojo.Product" useGeneratedKeys="true">
-    insert into product (name, subTitle, originalPrice, 
+    insert into product_view (name, subTitle, originalPrice,
       promotePrice, stock, cid, 
       createDate,status)
     values (#{name,jdbcType=VARCHAR}, #{subTitle,jdbcType=VARCHAR}, #{originalPrice,jdbcType=REAL}, 
@@ -82,7 +82,7 @@
       #{createDate,jdbcType=TIMESTAMP},#{status,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.kinben233.DDMall.pojo.Product" useGeneratedKeys="true">
-    insert into product
+    insert into product_view
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="name != null">
         name,
@@ -133,7 +133,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.kinben233.DDMall.pojo.Product">
-    update product
+    update product_view
     <set>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
@@ -163,7 +163,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.kinben233.DDMall.pojo.Product">
-    update product
+    update product_view
     set name = #{name,jdbcType=VARCHAR},
       subTitle = #{subTitle,jdbcType=VARCHAR},
       originalPrice = #{originalPrice,jdbcType=REAL},
