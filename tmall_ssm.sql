@@ -11,7 +11,7 @@
  Target Server Version : 80019
  File Encoding         : 65001
 
- Date: 17/07/2020 15:54:07
+ Date: 22/08/2020 15:41:42
 */
 
 SET NAMES utf8mb4;
@@ -26,12 +26,13 @@ CREATE TABLE `admin`  (
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
 INSERT INTO `admin` VALUES (1, '845378495', 'kinben233');
+INSERT INTO `admin` VALUES (2, 'admin', 'admin');
 
 -- ----------------------------
 -- Table structure for category
@@ -42,19 +43,13 @@ CREATE TABLE `category`  (
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 208 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 209 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of category
 -- ----------------------------
 INSERT INTO `category` VALUES (201, '壁纸', 'exist');
-INSERT INTO `category` VALUES (202, '填充', 'exist');
-INSERT INTO `category` VALUES (203, '填充', 'exist');
-INSERT INTO `category` VALUES (204, '填充', 'exist');
-INSERT INTO `category` VALUES (205, '填充', 'exist');
-INSERT INTO `category` VALUES (206, '填充', 'exist');
-INSERT INTO `category` VALUES (207, '填充', 'exist');
-INSERT INTO `category` VALUES (208, '填充', 'exist');
+INSERT INTO `category` VALUES (209, '空调', 'exist');
 
 -- ----------------------------
 -- Table structure for order_
@@ -90,8 +85,8 @@ INSERT INTO `order_` VALUES (13, '202006301653344066244', '', '', '', '', '', '2
 INSERT INTO `order_` VALUES (14, '202006301705563621375', '', '', '', '', '', '2020-06-30 17:05:56', '2020-06-30 17:05:58', '2020-06-30 17:06:03', '2020-07-01 16:13:26', 8, 'finish');
 INSERT INTO `order_` VALUES (15, '202006301709348119029', '', '', '', '', '', '2020-06-30 17:09:34', '2020-06-30 17:09:36', NULL, NULL, 8, 'waitDelivery');
 INSERT INTO `order_` VALUES (16, '202007011613134938199', '', '', '', '', '', '2020-07-01 16:13:13', '2020-07-01 16:13:15', NULL, NULL, 8, 'waitDelivery');
-INSERT INTO `order_` VALUES (17, '202007072307364245060', '', '', '', '', '', '2020-07-07 23:07:36', '2020-07-07 23:07:39', NULL, NULL, 8, 'waitDelivery');
-INSERT INTO `order_` VALUES (18, '202007072328282365136', '', '', '', '', '', '2020-07-07 23:28:28', '2020-07-07 23:28:29', NULL, NULL, 8, 'waitDelivery');
+INSERT INTO `order_` VALUES (17, '202007072307364245060', '', '', '', '', '', '2020-07-07 23:07:36', '2020-07-07 23:07:39', '2020-08-14 23:53:50', NULL, 8, 'waitConfirm');
+INSERT INTO `order_` VALUES (18, '202007072328282365136', '', '', '', '', '', '2020-07-07 23:28:28', '2020-07-07 23:28:29', '2020-08-12 16:17:29', NULL, 8, 'waitConfirm');
 
 -- ----------------------------
 -- Table structure for orderitem
@@ -110,21 +105,7 @@ CREATE TABLE `orderitem`  (
   CONSTRAINT `fk_orderitem_order` FOREIGN KEY (`oid`) REFERENCES `order_` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_orderitem_product` FOREIGN KEY (`pid`) REFERENCES `product` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_orderitem_user` FOREIGN KEY (`uid`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of orderitem
--- ----------------------------
-INSERT INTO `orderitem` VALUES (8, 6, 9, 8, 1);
-INSERT INTO `orderitem` VALUES (12, 6, 10, 8, 2);
-INSERT INTO `orderitem` VALUES (13, 6, 11, 8, 3);
-INSERT INTO `orderitem` VALUES (14, 6, 12, 8, 1);
-INSERT INTO `orderitem` VALUES (15, 6, 13, 8, 1);
-INSERT INTO `orderitem` VALUES (16, 6, 14, 8, 1);
-INSERT INTO `orderitem` VALUES (17, 6, 15, 8, 1);
-INSERT INTO `orderitem` VALUES (18, 6, 16, 8, 1);
-INSERT INTO `orderitem` VALUES (19, 6, 17, 8, 1);
-INSERT INTO `orderitem` VALUES (20, 6, 18, 8, 1);
+) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for product
@@ -143,18 +124,7 @@ CREATE TABLE `product`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_product_category`(`cid`) USING BTREE,
   CONSTRAINT `fk_product_category` FOREIGN KEY (`cid`) REFERENCES `category` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of product
--- ----------------------------
-INSERT INTO `product` VALUES (6, '天野阳菜', '天气之子 diy 数字油画', 29.98, 19.98, 989, 201, '2020-06-21 11:16:27', 'exist');
-INSERT INTO `product` VALUES (7, '手机', '四大名著青之一少年版中小学生课外读物儿童文学书', 99.98, 19.98, 99, 208, '2020-07-16 19:02:31', 'exist');
-INSERT INTO `product` VALUES (8, 'root', '四大名著青之一少年版中小学生课外读物儿童文学书', 99.98, 19.98, 99, 208, '2020-07-16 19:02:35', 'exist');
-INSERT INTO `product` VALUES (9, '填充', '', 99.98, 19.98, 99, 208, '2020-07-16 19:02:37', 'exist');
-INSERT INTO `product` VALUES (10, '填充', '', 99.98, 19.98, 99, 208, '2020-07-16 19:02:39', 'exist');
-INSERT INTO `product` VALUES (11, '填充', '', 99.98, 19.98, 99, 208, '2020-07-16 19:02:42', 'exist');
-INSERT INTO `product` VALUES (12, '填充', '', 99.98, 19.98, 99, 208, '2020-07-16 19:02:44', 'exist');
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for productimage
@@ -167,20 +137,7 @@ CREATE TABLE `productimage`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_productimage_product`(`pid`) USING BTREE,
   CONSTRAINT `fk_productimage_product` FOREIGN KEY (`pid`) REFERENCES `product` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 38 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of productimage
--- ----------------------------
-INSERT INTO `productimage` VALUES (29, 6, 'type_single');
-INSERT INTO `productimage` VALUES (30, 6, 'type_single');
-INSERT INTO `productimage` VALUES (31, 6, 'type_single');
-INSERT INTO `productimage` VALUES (32, 6, 'type_single');
-INSERT INTO `productimage` VALUES (33, 6, 'type_single');
-INSERT INTO `productimage` VALUES (34, 6, 'type_detail');
-INSERT INTO `productimage` VALUES (35, 6, 'type_detail');
-INSERT INTO `productimage` VALUES (36, 6, 'type_detail');
-INSERT INTO `productimage` VALUES (37, 6, 'type_detail');
+) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for property
@@ -193,27 +150,7 @@ CREATE TABLE `property`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_property_category`(`cid`) USING BTREE,
   CONSTRAINT `fk_property_category` FOREIGN KEY (`cid`) REFERENCES `category` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of property
--- ----------------------------
-INSERT INTO `property` VALUES (17, 203, '填充');
-INSERT INTO `property` VALUES (18, 203, 'root');
-INSERT INTO `property` VALUES (19, 203, 'root');
-INSERT INTO `property` VALUES (20, 203, '手机');
-INSERT INTO `property` VALUES (21, 203, 'root');
-INSERT INTO `property` VALUES (22, 203, '新标日');
-INSERT INTO `property` VALUES (23, 203, 'admin');
-INSERT INTO `property` VALUES (24, 208, 'root');
-INSERT INTO `property` VALUES (25, 208, 'root');
-INSERT INTO `property` VALUES (26, 208, '123');
-INSERT INTO `property` VALUES (27, 208, 'root');
-INSERT INTO `property` VALUES (28, 208, 'root');
-INSERT INTO `property` VALUES (29, 208, '填充');
-INSERT INTO `property` VALUES (30, 208, '填充');
-INSERT INTO `property` VALUES (31, 208, 'root');
-INSERT INTO `property` VALUES (32, 208, 'admin');
+) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for propertyvalue
@@ -249,15 +186,6 @@ CREATE TABLE `review`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of review
--- ----------------------------
-INSERT INTO `review` VALUES (2, '挺好的', 8, 6, '2020-06-21 14:09:06');
-INSERT INTO `review` VALUES (3, '😭', 8, 6, '2020-07-01 17:45:31');
-INSERT INTO `review` VALUES (4, 'kele', 8, 6, '2020-07-07 23:28:46');
-INSERT INTO `review` VALUES (5, '123', 8, 6, '2020-07-07 23:32:02');
-INSERT INTO `review` VALUES (6, 'gf', 8, 6, '2020-07-07 23:32:32');
-
--- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
@@ -273,5 +201,65 @@ CREATE TABLE `user`  (
 -- ----------------------------
 INSERT INTO `user` VALUES (8, '845378495', 'z123456789');
 INSERT INTO `user` VALUES (9, 'root', '123456');
+
+-- ----------------------------
+-- View structure for admin_view
+-- ----------------------------
+DROP VIEW IF EXISTS `admin_view`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `admin_view` AS select `admin`.`id` AS `id`,`admin`.`name` AS `name`,`admin`.`password` AS `password` from `admin`;
+
+-- ----------------------------
+-- View structure for category_view
+-- ----------------------------
+DROP VIEW IF EXISTS `category_view`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `category_view` AS select `category`.`id` AS `id`,`category`.`name` AS `name`,`category`.`status` AS `status` from `category`;
+
+-- ----------------------------
+-- View structure for order_view
+-- ----------------------------
+DROP VIEW IF EXISTS `order_view`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `order_view` AS select `order_`.`id` AS `id`,`order_`.`orderCode` AS `orderCode`,`order_`.`address` AS `address`,`order_`.`post` AS `post`,`order_`.`receiver` AS `receiver`,`order_`.`mobile` AS `mobile`,`order_`.`userMessage` AS `userMessage`,`order_`.`createDate` AS `createDate`,`order_`.`payDate` AS `payDate`,`order_`.`deliveryDate` AS `deliveryDate`,`order_`.`confirmDate` AS `confirmDate`,`order_`.`uid` AS `uid`,`order_`.`status` AS `status` from `order_`;
+
+-- ----------------------------
+-- View structure for orderitem_view
+-- ----------------------------
+DROP VIEW IF EXISTS `orderitem_view`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `orderitem_view` AS select `orderitem`.`id` AS `id`,`orderitem`.`pid` AS `pid`,`orderitem`.`oid` AS `oid`,`orderitem`.`uid` AS `uid`,`orderitem`.`number` AS `number` from `orderitem`;
+
+-- ----------------------------
+-- View structure for product_view
+-- ----------------------------
+DROP VIEW IF EXISTS `product_view`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `product_view` AS select `product`.`id` AS `id`,`product`.`name` AS `name`,`product`.`subTitle` AS `subTitle`,`product`.`originalPrice` AS `originalPrice`,`product`.`promotePrice` AS `promotePrice`,`product`.`stock` AS `stock`,`product`.`cid` AS `cid`,`product`.`createDate` AS `createDate`,`product`.`status` AS `status` from `product`;
+
+-- ----------------------------
+-- View structure for productimage_view
+-- ----------------------------
+DROP VIEW IF EXISTS `productimage_view`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `productimage_view` AS select `productimage`.`id` AS `id`,`productimage`.`pid` AS `pid`,`productimage`.`type` AS `type` from `productimage`;
+
+-- ----------------------------
+-- View structure for property_view
+-- ----------------------------
+DROP VIEW IF EXISTS `property_view`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `property_view` AS select `property`.`id` AS `id`,`property`.`cid` AS `cid`,`property`.`name` AS `name` from `property`;
+
+-- ----------------------------
+-- View structure for propertyvalue_view
+-- ----------------------------
+DROP VIEW IF EXISTS `propertyvalue_view`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `propertyvalue_view` AS select `propertyvalue`.`id` AS `id`,`propertyvalue`.`pid` AS `pid`,`propertyvalue`.`ptid` AS `ptid`,`propertyvalue`.`value` AS `value` from `propertyvalue`;
+
+-- ----------------------------
+-- View structure for review_view
+-- ----------------------------
+DROP VIEW IF EXISTS `review_view`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `review_view` AS select `review`.`id` AS `id`,`review`.`content` AS `content`,`review`.`uid` AS `uid`,`review`.`pid` AS `pid`,`review`.`createDate` AS `createDate` from `review`;
+
+-- ----------------------------
+-- View structure for user_view
+-- ----------------------------
+DROP VIEW IF EXISTS `user_view`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `user_view` AS select `user`.`id` AS `id`,`user`.`name` AS `name`,`user`.`password` AS `password` from `user`;
 
 SET FOREIGN_KEY_CHECKS = 1;

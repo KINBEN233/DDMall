@@ -116,7 +116,7 @@
 <img src="img/1.png" style="position:fixed;right:0px;bottom:0px" height="340px" width="144px">
 <div id="login_frame">
 
-    <p id="image_logo"><img src="img/ai.png" class="img-circle"></p>
+    <p id="image_logo"><img src="img/ai.png" class="img-circle" height="200px" width="200px"></p>
     <span class="text-success">${user.name}</span><br/>
     <br/>
     <form class="loginForm" method="post">
